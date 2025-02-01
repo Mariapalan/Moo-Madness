@@ -8,12 +8,14 @@ public class walking : MonoBehaviour
 
     private Vector2 direction;
     private Rigidbody2D rb;
+    private SpriteRenderer spriteRenderer;
     private float changeDirectionTime = 1f;
     private float timer;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         ChangeDirection();
     }
 
@@ -42,17 +44,51 @@ public class walking : MonoBehaviour
             case 2: direction = Vector2.left; break;
             case 3: direction = Vector2.right; break;
         }
+
+        RotateSprite();
     }
 
-    // Reverses direction when colliding with an object
     void OnCollisionEnter2D(Collision2D collision)
     {
-        direction = -direction; // Reverse direction
+        if (collision.gameObject.CompareTag("Fence"))
+        {
+            ImmediateDirectionChange();
+        }
     }
 
-    // Works if the object uses "Is Trigger"
     void OnTriggerEnter2D(Collider2D other)
     {
-        direction = -direction; // Reverse direction for trigger collisions
+        if (other.gameObject.CompareTag("Fence"))
+        {
+            ImmediateDirectionChange();
+        }
+    }
+
+    // Instantly change direction upon collision
+    void ImmediateDirectionChange()
+    {
+        timer = 0f; // Reset the timer for smooth behavior
+        ChangeDirection(); // Pick a new direction immediately
+    }
+
+    // Rotates the sprite based on movement direction
+    void RotateSprite()
+    {
+        if (direction == Vector2.up)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 90);  // Face Up
+        }
+        else if (direction == Vector2.down)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, -90); // Face Down
+        }
+        else if (direction == Vector2.left)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 180); // Face Left
+        }
+        else if (direction == Vector2.right)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);   // Face Right
+        }
     }
 }
