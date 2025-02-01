@@ -31,9 +31,9 @@ public class CowSpawner : MonoBehaviour
 
         int randomIndex = Random.Range(0, Prefabs.Length);
         Vector3 randomSpawnPosition = new Vector3(
-            Random.Range(-2f, 1.5f), 
-            Random.Range(-4f, -0.4f), 
-            0f
+            Random.Range(-15f, 8.7f), 
+            Random.Range(-14f, 7.8f), 
+            -1f
         );
 
         Instantiate(Prefabs[randomIndex], randomSpawnPosition, Quaternion.identity);
