@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7572325249376778424}
   - component: {fileID: 2981939786060029546}
-  - component: {fileID: 2451725725420458584}
+  - component: {fileID: 5507780512622545184}
   m_Layer: 0
   m_Name: Fence
   m_TagString: Untagged
@@ -27,8 +27,8 @@ Transform:
   m_GameObject: {fileID: 4159791729034497631}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.18, y: 2.17, z: -1}
-  m_LocalScale: {x: 6.1548653, y: 6.008699, z: 1}
+  m_LocalPosition: {x: -6.0477, y: 2.2713, z: -1}
+  m_LocalScale: {x: 7.2786303, y: 6.8380146, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -85,8 +85,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!68 &2451725725420458584
-EdgeCollider2D:
+--- !u!61 &5507780512622545184
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -117,21 +117,16 @@ EdgeCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.013908625, y: 0.008459955}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.25, y: 1.25}
+    newSize: {x: 0.4, y: 0.4}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.4526691, y: 1.0300417}
   m_EdgeRadius: 0
-  m_Points:
-  - {x: -0.32205147, y: 0.12943809}
-  - {x: -0.3319476, y: -0.08849084}
-  - {x: -0.3055581, y: -0.112143375}
-  - {x: -0.19752595, y: -0.15521124}
-  - {x: 0.19660974, y: -0.15504712}
-  - {x: 0.33020654, y: -0.10267367}
-  - {x: 0.33005804, y: 0.09846371}
-  - {x: 0.32511002, y: 0.13225311}
-  - {x: 0.19812071, y: 0.16645442}
-  - {x: -0.20131259, y: 0.17371672}
-  - {x: -0.32089007, y: 0.13063532}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
