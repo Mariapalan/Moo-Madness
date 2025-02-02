@@ -9,23 +9,30 @@ public class CaptureZone : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Cow"))
+        if (other.CompareTag("Cow")) // Ensure it's a cow
         {
-            Debug.Log("COW ENTERS ZONE 1");
-            CaptureCow(other.gameObject);
-        }
+            Cow cowScript = other.GetComponent<Cow>();
+
+            if (cowScript != null && !(cowScript.isLassoed)) // Check if lassoed
+            {
+                Debug.Log("Lassoed cow captured!");
+                GameManager.Instance.CaptureCow(cowScript.capturedByPlayerID); 
+                Destroy(other.gameObject); // Remove the cow
+            }
+            else
+            {
+                Debug.Log("Cow is not lassoed! Ignored.");
+            }
+        }   
     }
 
-    private void CaptureCow(GameObject cow)
+    /*private void CaptureCow(GameObject cow)
     {
-    
-        gameManager.Instance.AddScore(playerID, 1);
-
+        GameManager.Instance.AddScore(playerID, 1);
+        
         //AudioManager.Instance.PlaySound("cow_captured");
-
-
         Destroy(cow);
-    }
+    }*/
 
 }
 
