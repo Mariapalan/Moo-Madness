@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -6268200078349209433}
   m_Layer: 0
   m_Name: cow1
-  m_TagString: Untagged
+  m_TagString: Cow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,6 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   cowSound: {fileID: 8300000, guid: 56b81607efec24805ad024b5f7aac78f, type: 3}
+  isLassoed: 0
 --- !u!50 &1878588618006801279
 Rigidbody2D:
   serializedVersion: 4

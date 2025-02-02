@@ -7,6 +7,7 @@ public class walking : MonoBehaviour
     public float speed = 200f;
     public AudioClip cowSound;
 
+    public bool isLassoed;
     private Vector2 direction;
     private Rigidbody2D rb;
     private AudioSource audioSource;

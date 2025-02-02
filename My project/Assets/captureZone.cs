@@ -1,24 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CaptureZone : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
-    {
+    public int playerID; 
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
         if (other.CompareTag("Cow"))
         {
+            Debug.Log("COW ENTERS ZONE 1");
             CaptureCow(other.gameObject);
         }
     }
 
     private void CaptureCow(GameObject cow)
     {
+    
+        gameManager.Instance.AddScore(playerID, 1);
 
-        // GameManager.Instance.AddScore(1);
-        // AudioManager.Instance.PlaySound("cow_captured");
+        //AudioManager.Instance.PlaySound("cow_captured");
+
 
         Destroy(cow);
     }
+
 }
+
