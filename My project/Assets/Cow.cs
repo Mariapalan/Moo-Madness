@@ -5,29 +5,54 @@ using UnityEngine;
 public class Cow : MonoBehaviour
 {
     public float speed = 200f;
+    public AudioClip cowSound;
 
     public bool isLassoed = false;
     public int capturedByPlayerID = 0;
     private Vector2 direction;
     private Rigidbody2D rb;
-    private SpriteRenderer spriteRenderer;
+    private AudioSource audioSource;
+
     private float changeDirectionTime = 1f;
     private float timer;
+
+    private float mooTimer;
+    private float nextMooTime;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+        audioSource.playOnAwake = false;
+        audioSource.spatialBlend = 0;
+        audioSource.volume = 0.7f;
+
         ChangeDirection();
+        mooTimer = Random.Range(0f, 3f);  // Randomize initial moo
+        SetNextMooTime(true);
     }
 
     void Update()
     {
         timer += Time.deltaTime;
+        mooTimer += Time.deltaTime;
+
         if (timer >= changeDirectionTime)
         {
             ChangeDirection();
             timer = 0f;
+        }
+
+        if (mooTimer >= nextMooTime && MooManager.Instance.CanMoo() && !audioSource.isPlaying)
+        {
+            PlayCowSound();
+            SetNextMooTime();
+            MooManager.Instance.TriggerMooCooldown();
         }
     }
 
@@ -46,51 +71,20 @@ public class Cow : MonoBehaviour
             case 2: direction = Vector2.left; break;
             case 3: direction = Vector2.right; break;
         }
-
-        RotateSprite();
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void PlayCowSound()
     {
-        if (collision.gameObject.CompareTag("Fence"))
+        if (audioSource != null && cowSound != null)
         {
-            ImmediateDirectionChange();
-        }
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Fence"))
-        {
-            ImmediateDirectionChange();
+            audioSource.PlayOneShot(cowSound);
+            Debug.Log("Moo from " + gameObject.name);
         }
     }
 
-    // Instantly change direction upon collision
-    void ImmediateDirectionChange()
+    void SetNextMooTime(bool initialDelay = false)
     {
-        timer = 0f; // Reset the timer for smooth behavior
-        ChangeDirection(); // Pick a new direction immediately
-    }
-
-    // Rotates the sprite based on movement direction
-    void RotateSprite()
-    {
-        if (direction == Vector2.up)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 90);  // Face Up
-        }
-        else if (direction == Vector2.down)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, -90); // Face Down
-        }
-        else if (direction == Vector2.left)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 180); // Face Left
-        }
-        else if (direction == Vector2.right)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 0);   // Face Right
-        }
+        mooTimer = 0f;
+        nextMooTime = initialDelay ? Random.Range(10f, 15f) : Random.Range(12f, 20f);
     }
 }
