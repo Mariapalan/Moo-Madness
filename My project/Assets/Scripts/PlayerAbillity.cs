@@ -27,9 +27,22 @@ public class PlayerAbility : MonoBehaviour
     void UseAbility()
     {
         Vector2 direction = playerMovement.GetLastDirection();
-        GameObject ability = Instantiate(abilityPrefab, transform.position, Quaternion.identity);
-        ability.GetComponent<Rigidbody2D>().velocity = direction * abilitySpeed;
 
+        if (direction == Vector2.zero)
+        {
+            Debug.LogWarning("Direction is zero, check player movement.");
+        }
+        GameObject ability = Instantiate(abilityPrefab, transform.position, Quaternion.identity);
+
+        Rigidbody2D rbAbility = ability.GetComponentInChildren<Rigidbody2D>();
+        if (rbAbility != null)
+        {
+            rbAbility.velocity = direction * abilitySpeed;
+        }
+        else
+        {
+            Debug.LogError("Rigidbody2D not found on the flashbang's capsule child.");
+        }
         canUseAbility = false;
         Invoke(nameof(ResetAbility), abilityCooldown);
     }

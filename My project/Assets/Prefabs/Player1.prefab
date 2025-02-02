@@ -10,6 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7143174408546678809}
   - component: {fileID: 5602922947441197095}
+  - component: {fileID: -7207667371863589020}
+  - component: {fileID: 6889039782738261183}
+  - component: {fileID: 8970087242918419059}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -84,3 +87,60 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-7207667371863589020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2703808342069665166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e148b138339a535c3b8e9f591461609b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputPrefix: Player1
+  moveSpeed: 5
+--- !u!50 &6889039782738261183
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2703808342069665166}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &8970087242918419059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2703808342069665166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b88b1c7a6c7c5e0aa2094c0497c2e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputPrefix: Player1
+  abilityPrefab: {fileID: 2178724154523606383, guid: 7ae60cb393a58dc97aaf5ff7252f9a12, type: 3}
+  abilitySpeed: 7
+  abilityCooldown: 2
