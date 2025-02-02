@@ -13,7 +13,7 @@ public class CaptureZone : MonoBehaviour
         {
             Cow cowScript = other.GetComponent<Cow>();
 
-            if (cowScript != null && !(cowScript.isLassoed)) 
+            if (cowScript != null && cowScript.isLassoed) 
             {
                 Debug.Log("Lassoed cow captured!");
                 GameManager.Instance.CaptureCow(cowScript.capturedByPlayerID); 
