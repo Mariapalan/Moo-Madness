@@ -31,8 +31,8 @@ public class CowSpawner : MonoBehaviour
 
         int randomIndex = Random.Range(0, Prefabs.Length);
         Vector3 randomSpawnPosition = new Vector3(
-            Random.Range(-15f, 8.7f), 
-            Random.Range(-14f, 7.8f), 
+            Random.Range(-30f, 29f), 
+            Random.Range(-30f, 14f), 
             -1f
         );
 
