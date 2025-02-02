@@ -11,9 +11,10 @@ public class gameManager : MonoBehaviour
 
     private int player1Score = 0;
     private int player2Score = 0;
-
     public TextMeshProUGUI player1ScoreText;  
     public TextMeshProUGUI player2ScoreText; 
+    public GameObject winScreen;
+    public Text winText;
 
     private void Awake()
     {
