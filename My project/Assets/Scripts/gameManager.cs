@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour
 
     public Text winText;
 
+    public TextMeshProUGUI countdownText; // Assign this in Inspector
+    public int cowCount = 5; // Number of cows to spawn
+    public int countdownTime = 3; // Countdown duration
     private void Awake()
     {
         
