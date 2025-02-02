@@ -5,27 +5,47 @@ using UnityEngine;
 public class walking : MonoBehaviour
 {
     public float speed = 200f;
+    public AudioClip cowSound; // 🎵 Cow sound clip
 
     private Vector2 direction;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
+    private AudioSource audioSource; // 🎵 AudioSource for playing the sound
     private float changeDirectionTime = 1f;
     private float timer;
+
+    // 🎵 Mooing variables
+    private float mooTimer;
+    private float nextMooTime;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
+
         ChangeDirection();
+
+        // 🎵 Set the first random moo time between 3 to 7 seconds
+        SetNextMooTime();
     }
 
     void Update()
     {
         timer += Time.deltaTime;
+        mooTimer += Time.deltaTime; // 🎵 Track time for mooing
+
         if (timer >= changeDirectionTime)
         {
             ChangeDirection();
             timer = 0f;
+        }
+
+        // 🎵 Moo at random intervals
+        if (mooTimer >= nextMooTime)
+        {
+            PlayCowSound();
+            SetNextMooTime();
         }
     }
 
@@ -64,31 +84,37 @@ public class walking : MonoBehaviour
         }
     }
 
-    // Instantly change direction upon collision
     void ImmediateDirectionChange()
     {
-        timer = 0f; // Reset the timer for smooth behavior
-        ChangeDirection(); // Pick a new direction immediately
+        timer = 0f;
+        ChangeDirection();
     }
 
-    // Rotates the sprite based on movement direction
     void RotateSprite()
     {
         if (direction == Vector2.up)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 90);  // Face Up
-        }
+            transform.rotation = Quaternion.Euler(0, 0, 90);
         else if (direction == Vector2.down)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, -90); // Face Down
-        }
+            transform.rotation = Quaternion.Euler(0, 0, -90);
         else if (direction == Vector2.left)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 180); // Face Left
-        }
+            transform.rotation = Quaternion.Euler(0, 0, 180);
         else if (direction == Vector2.right)
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
+
+    // 🎵 Plays the cow sound
+    void PlayCowSound()
+    {
+        if (audioSource != null && cowSound != null)
         {
-            transform.rotation = Quaternion.Euler(0, 0, 0);   // Face Right
+            audioSource.PlayOneShot(cowSound);
         }
+    }
+
+    // 🎵 Sets the next random moo time between 3 to 7 seconds
+    void SetNextMooTime()
+    {
+        mooTimer = 0f;
+        nextMooTime = Random.Range(3f, 7f); // Random time interval
     }
 }
