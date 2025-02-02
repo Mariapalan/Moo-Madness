@@ -48,6 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30b961a02059b341837c31f12c5ed9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  winningScore: 20
   player1ScoreText: {fileID: 0}
   player2ScoreText: {fileID: 0}
-  scoreText: {fileID: 0}
+  winScreen: {fileID: 0}
+  winText: {fileID: 0}

@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class walking : MonoBehaviour
+public class Cow : MonoBehaviour
 {
     public float speed = 200f;
     public AudioClip cowSound;
 
-    public bool isLassoed;
+    public bool isLassoed = false;
+    public int capturedByPlayerID = 0;
     private Vector2 direction;
     private Rigidbody2D rb;
     private AudioSource audioSource;
