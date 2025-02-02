@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class CaptureZone : MonoBehaviour
 {
+    public int playerID; 
+
     private void OnTriggerEnter(Collider other)
     {
- 
         if (other.CompareTag("Cow"))
         {
             CaptureCow(other.gameObject);
@@ -15,11 +16,12 @@ public class CaptureZone : MonoBehaviour
 
     private void CaptureCow(GameObject cow)
     {
-        
-        GameManager.Instance.AddScore(1);
+    
+        gameManager.Instance.AddScore(playerID, 1);
 
-        AudioManager.Instance.PlaySound("cow_captured");
+        //AudioManager.Instance.PlaySound("cow_captured");
 
         Destroy(cow);
     }
 }
+
