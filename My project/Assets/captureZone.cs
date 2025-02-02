@@ -23,6 +23,7 @@ public class CaptureZone : MonoBehaviour
 
         //AudioManager.Instance.PlaySound("cow_captured");
 
+
         Destroy(cow);
     }
 
