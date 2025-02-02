@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2191751244808093042}
   m_Layer: 0
   m_Name: cow1
-  m_TagString: Untagged
+  m_TagString: Cow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
+  isLassoed: 0
 --- !u!50 &1878588618006801279
 Rigidbody2D:
   serializedVersion: 4

@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Fence
+  - Cow
   layers:
   - Default
   - TransparentFX

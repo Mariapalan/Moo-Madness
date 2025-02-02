@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class gameManager : MonoBehaviour
 {
@@ -11,8 +12,9 @@ public class gameManager : MonoBehaviour
     private int player1Score = 0;
     private int player2Score = 0;
 
-    public Text player1ScoreText;  
-    public Text player2ScoreText; 
+    public TextMeshProUGUI player1ScoreText;  
+    public TextMeshProUGUI player2ScoreText; 
+
     private void Awake()
     {
         
