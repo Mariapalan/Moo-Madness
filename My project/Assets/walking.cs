@@ -5,35 +5,40 @@ using UnityEngine;
 public class walking : MonoBehaviour
 {
     public float speed = 200f;
-    public AudioClip cowSound; // 🎵 Cow sound clip
+    public AudioClip cowSound;
 
     private Vector2 direction;
     private Rigidbody2D rb;
-    private SpriteRenderer spriteRenderer;
-    private AudioSource audioSource; // 🎵 AudioSource for playing the sound
+    private AudioSource audioSource;
+
     private float changeDirectionTime = 1f;
     private float timer;
 
-    // 🎵 Mooing variables
     private float mooTimer;
     private float nextMooTime;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+
         audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+        audioSource.playOnAwake = false;
+        audioSource.spatialBlend = 0;
+        audioSource.volume = 0.7f;
 
         ChangeDirection();
-
-        // 🎵 Set the first random moo time between 3 to 7 seconds
-        SetNextMooTime();
+        mooTimer = Random.Range(0f, 3f);  // Randomize initial moo
+        SetNextMooTime(true);
     }
 
     void Update()
     {
         timer += Time.deltaTime;
-        mooTimer += Time.deltaTime; // 🎵 Track time for mooing
+        mooTimer += Time.deltaTime;
 
         if (timer >= changeDirectionTime)
         {
@@ -41,11 +46,11 @@ public class walking : MonoBehaviour
             timer = 0f;
         }
 
-        // 🎵 Moo at random intervals
-        if (mooTimer >= nextMooTime)
+        if (mooTimer >= nextMooTime && MooManager.Instance.CanMoo() && !audioSource.isPlaying)
         {
             PlayCowSound();
             SetNextMooTime();
+            MooManager.Instance.TriggerMooCooldown();
         }
     }
 
@@ -64,57 +69,20 @@ public class walking : MonoBehaviour
             case 2: direction = Vector2.left; break;
             case 3: direction = Vector2.right; break;
         }
-
-        RotateSprite();
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Fence"))
-        {
-            ImmediateDirectionChange();
-        }
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Fence"))
-        {
-            ImmediateDirectionChange();
-        }
-    }
-
-    void ImmediateDirectionChange()
-    {
-        timer = 0f;
-        ChangeDirection();
-    }
-
-    void RotateSprite()
-    {
-        if (direction == Vector2.up)
-            transform.rotation = Quaternion.Euler(0, 0, 90);
-        else if (direction == Vector2.down)
-            transform.rotation = Quaternion.Euler(0, 0, -90);
-        else if (direction == Vector2.left)
-            transform.rotation = Quaternion.Euler(0, 0, 180);
-        else if (direction == Vector2.right)
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-    }
-
-    // 🎵 Plays the cow sound
     void PlayCowSound()
     {
         if (audioSource != null && cowSound != null)
         {
             audioSource.PlayOneShot(cowSound);
+            Debug.Log("Moo from " + gameObject.name);
         }
     }
 
-    // 🎵 Sets the next random moo time between 3 to 7 seconds
-    void SetNextMooTime()
+    void SetNextMooTime(bool initialDelay = false)
     {
         mooTimer = 0f;
-        nextMooTime = Random.Range(3f, 7f); // Random time interval
+        nextMooTime = initialDelay ? Random.Range(10f, 15f) : Random.Range(12f, 20f);
     }
 }
